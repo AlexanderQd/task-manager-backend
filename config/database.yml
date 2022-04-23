@@ -1,0 +1,26 @@
+default: &default
+  adapter: <%= Appconfig::Database::ADAPTER %>
+  encoding: <%= Appconfig::Database::ENCODING %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= Appconfig::Database::USER %>
+  password: <%= Appconfig::Database::PASSWORD %>
+
+development:
+  primary:
+    <<: *default
+    database: <%= Appconfig::Database::Main::NAME %>
+  primary_replica:
+    <<: *default
+    database: <%= Appconfig::Database::Main::NAME %>
+    replica: true
+
+production:
+  primary:
+    <<: *default
+    database: <%= Appconfig::Database::Main::NAME %>
+    password: <%= Appconfig::Database::PASSWORD %>
+  primary_replica:
+    <<: *default
+    database: <%= Appconfig::Database::Main::NAME %>
+    password: <%= Appconfig::Database::PASSWORD %>
+    replica: true
