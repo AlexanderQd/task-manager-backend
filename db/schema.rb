@@ -37,17 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 6) do
     t.index ["user_id"], name: "index_projects_users_on_user_id"
   end
 
-  create_table "registers", force: :cascade do |t|
-    t.datetime "starts_at"
-    t.datetime "ends_at"
-    t.integer "task_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_registers_on_task_id"
-    t.index ["user_id"], name: "index_registers_on_user_id"
-  end
-
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.integer "project_id"
@@ -60,6 +49,17 @@ ActiveRecord::Schema[7.0].define(version: 6) do
     t.index ["finished"], name: "index_tasks_on_finished"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["status_cd"], name: "index_tasks_on_status_cd"
+  end
+
+  create_table "tasks_registers", force: :cascade do |t|
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.integer "task_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_tasks_registers_on_task_id"
+    t.index ["user_id"], name: "index_tasks_registers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -5,6 +5,12 @@ class User < ApplicationRecord
   has_many :projects, through: :projects_users
   has_many :registers
 
+  scope :active, ->  { where(active: true) }
+
+  def as_json options = {}
+    super(options)
+  end
+
   def self.current
     RequestStore.store[:user]
   end
