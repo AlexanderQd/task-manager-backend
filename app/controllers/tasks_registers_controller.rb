@@ -55,6 +55,16 @@ class TasksRegistersController < ApplicationController
     render json: json
   end
 
+  def current_register_of_user
+    current = Tasks::Register.find_by(user_id: params[:user_id], ends_at: nil)
+    render json: {
+     success: true,
+     status: 200,
+     register: (current.as_json unless current.nil?),
+     task: (current.task.as_json unless current.nil?)
+    }
+  end
+
   private
 
   def register_params
@@ -68,6 +78,6 @@ class TasksRegistersController < ApplicationController
   end
 
   def set_tasks_register
-    @register = Tasks::register.find(params[:id])
+    @register = Tasks::Register.find(params[:id])
   end
 end

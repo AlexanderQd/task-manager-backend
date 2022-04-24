@@ -94,7 +94,8 @@ class TasksController < ApplicationController
      :finished,
      :ends_at,
      :starts_at,
-     :status_cd
+     :status_cd,
+     tasks_registers_attributes: [:starts_at, :user_id]
     )
   end
 
